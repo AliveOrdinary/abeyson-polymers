@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+/* Tell Tailwind v4 where to scan for utility classes */
+@source "../app/**/*.{js,ts,jsx,tsx}";
+@source "../components/**/*.{js,ts,jsx,tsx}";
+
+:root {
+  /* Clean & Minimal Tech Palette - Light Mode */
+  --background: #ffffff;
+  --foreground: #09090b;        /* Zinc 950 - near black */
+  
+  /* Primary - High contrast dark */
+  --primary: #18181b;           /* Zinc 900 */
+  --primary-foreground: #ffffff;
+  
+  /* Accent - Eco green */
+  --accent: #22c55e;            /* Green 500 */
+  --accent-foreground: #ffffff;
+  
+  /* Secondary - Subtle */
+  --secondary: #f4f4f5;         /* Zinc 100 */
+  --secondary-foreground: #09090b;
+  
+  /* Muted backgrounds */
+  --muted: #fafafa;             /* Zinc 50 */
+  --muted-foreground: #71717a;  /* Zinc 500 */
+  
+  /* Cards */
+  --card: #ffffff;
+  --card-foreground: #09090b;
+  
+  /* Borders */
+  --border: #e4e4e7;            /* Zinc 200 */
+  --border-hover: #a1a1aa;      /* Zinc 400 */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Tech Premium Dark Mode */
+    --background: #09090b;       /* Zinc 950 */
+    --foreground: #fafafa;       /* Zinc 50 */
+    
+    --primary: #fafafa;
+    --primary-foreground: #09090b;
+    
+    --accent: #4ade80;           /* Green 400 */
+    --accent-foreground: #09090b;
+    
+    --secondary: #27272a;        /* Zinc 800 */
+    --secondary-foreground: #fafafa;
+    
+    --muted: #18181b;            /* Zinc 900 */
+    --muted-foreground: #a1a1aa; /* Zinc 400 */
+    
+    --card: #18181b;
+    --card-foreground: #fafafa;
+    
+    --border: #27272a;           /* Zinc 800 */
+    --border-hover: #52525b;     /* Zinc 600 */
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+  
+  /* Typography */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Display typography utility */
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Clean button styles */
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn-accent {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-accent:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* Clean card style */
+.card-clean {
+  background: var(--card);
+  border: 1px solid var(--border);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.card-clean:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+}
+
+/* Section utilities */
+.section-padding {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
