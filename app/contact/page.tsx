@@ -38,6 +38,15 @@ export default function Contact() {
 
   return (
     <main className="min-h-screen bg-background">
+      {/* Hidden form for Netlify build detection - required for JS-rendered forms */}
+      <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+        <input type="text" name="name" />
+        <input type="tel" name="phone" />
+        <input type="text" name="company" />
+        <input type="text" name="product" />
+        <textarea name="message" />
+      </form>
+
       {/* Hero */}
       <section className="section-padding border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
