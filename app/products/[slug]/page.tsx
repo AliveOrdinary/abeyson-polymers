@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { PRODUCTS, COMPANY_INFO } from '@/lib/data';
 import { SpecTable } from '@/components/SpecTable';
+import { GroceryBagSelector } from '@/components/GroceryBagSelector';
 import { Check, ArrowRight, ChevronLeft } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import { motion } from 'framer-motion';
@@ -25,13 +26,13 @@ export default function ProductDetailPage() {
       {/* Hero with Large Image */}
       <section className="relative h-[50vh] md:h-[60vh] overflow-hidden">
         <Image
-          src={category.image}
+          src={category.heroImage}
           alt={category.title}
           fill
-          className="object-cover"
+          className="object-cover object-center"
           priority
         />
-        <div className="absolute inset-0 bg-foreground/60" />
+        <div className="absolute inset-0 bg-foreground/50" />
         
         <div className="relative z-10 h-full flex flex-col justify-end max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
           <Link 
@@ -110,6 +111,13 @@ export default function ProductDetailPage() {
                       </h4>
                       <SpecTable specs={product.specs} productName={product.name} />
                     </div>
+
+                    {/* Grocery Bag Capacity Selector - only for grocery bags */}
+                    {category.slug === 'grocery-bags' && (
+                      <div className="mt-8">
+                        <GroceryBagSelector />
+                      </div>
+                    )}
                   </div>
 
                   {/* CTA Sidebar */}

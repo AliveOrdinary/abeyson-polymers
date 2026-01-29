@@ -19,13 +19,13 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="bg-background/80 backdrop-blur-md border-b border-border sticky top-0 z-50">
+    <nav className="bg-zinc-950 backdrop-blur-md border-b border-zinc-800 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 md:h-20">
           {/* Logo */}
           <div className="flex items-center">
             <Link href="/" className="flex items-center gap-3">
-               <div className="relative h-10 w-10">
+               <div className="relative h-8 w-8 sm:h-10 sm:w-10">
                   <Image
                     src="/logo.png"
                     alt="Abeyson Polymers Logo"
@@ -33,7 +33,13 @@ export default function Navbar() {
                     className="object-contain"
                   />
                </div>
-               <span className="font-display font-bold text-lg tracking-tight text-foreground hidden sm:block">
+               {/* Mobile: Stacked name */}
+               <div className="flex flex-col leading-tight sm:hidden">
+                 <span className="font-display font-bold text-sm tracking-tight text-white">ABEYSON</span>
+                 <span className="font-display font-medium text-[10px] tracking-widest text-zinc-400">POLYMERS</span>
+               </div>
+               {/* Desktop: Single line */}
+               <span className="font-display font-bold text-lg tracking-tight text-white hidden sm:block">
                  {COMPANY_INFO.name}
                </span>
             </Link>
@@ -45,7 +51,7 @@ export default function Navbar() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-foreground/70 hover:text-foreground px-4 py-2 text-sm font-medium transition-colors"
+                className="text-zinc-400 hover:text-white px-4 py-2 text-sm font-medium transition-colors"
               >
                 {item.name}
               </Link>
@@ -65,7 +71,7 @@ export default function Navbar() {
           <div className="flex items-center md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 text-foreground"
+              className="p-2 text-white"
               aria-label="Toggle menu"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -82,14 +88,14 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden bg-background border-t border-border overflow-hidden"
+            className="md:hidden bg-zinc-950 border-t border-zinc-800 overflow-hidden"
           >
             <div className="px-4 py-4 space-y-1">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-foreground hover:text-accent block px-3 py-3 text-base font-medium border-b border-border last:border-0"
+                  className="text-white hover:text-accent block px-3 py-3 text-base font-medium border-b border-zinc-800 last:border-0"
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}

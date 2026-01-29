@@ -42,7 +42,7 @@ export default function Home() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-foreground/80" />
+          <div className="absolute inset-0 bg-foreground/50" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-background">
@@ -74,16 +74,8 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex justify-center"
           >
-            <a 
-              href={`https://wa.me/${COMPANY_INFO.whatsapp}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-accent text-accent-foreground px-8 py-4 font-semibold text-lg transition-all hover:opacity-90 flex items-center justify-center gap-2"
-            >
-              Request Quote <ArrowRight size={20} />
-            </a>
             <Link 
               href="/products"
               className="bg-background/10 backdrop-blur-sm border border-background/30 text-background px-8 py-4 font-semibold text-lg transition-all hover:bg-background/20 flex items-center justify-center gap-2"

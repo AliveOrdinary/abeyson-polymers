@@ -1,11 +1,41 @@
 
 'use client';
 
+import { useState } from 'react';
 import { COMPANY_INFO, PRODUCTS } from '@/lib/data';
-import { Mail, MapPin, Phone, Send, ArrowRight } from 'lucide-react';
+import { Mail, MapPin, Phone, Send, ArrowRight, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
+type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
+
 export default function Contact() {
+  const [formStatus, setFormStatus] = useState<FormStatus>('idle');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFormStatus('submitting');
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData as any).toString(),
+      });
+
+      if (response.ok) {
+        setFormStatus('success');
+        form.reset();
+      } else {
+        setFormStatus('error');
+      }
+    } catch {
+      setFormStatus('error');
+    }
+  };
+
   return (
     <main className="min-h-screen bg-background">
       {/* Hero */}
@@ -103,13 +133,18 @@ export default function Contact() {
                 </a>
               </div>
 
-              {/* Map Placeholder */}
-              <div className="bg-muted aspect-video w-full flex items-center justify-center text-muted-foreground border border-border">
-                <div className="text-center">
-                  <MapPin size={32} className="mx-auto mb-2 opacity-50" />
-                  <p className="text-sm">Map Coming Soon</p>
-                  <p className="text-xs">Pulickal Kavala, Kottayam</p>
-                </div>
+              {/* Google Maps Embed */}
+              <div className="aspect-video w-full border border-border overflow-hidden">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3934.123!2d76.7458!3d9.5442!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOcKwMzInMzkuMSJOIDc2wrA0NCc0NC45IkU!5e0!3m2!1sen!2sin!4v1706000000000!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Abeyson Polymers Location - Pulickal Kavala, Kottayam"
+                />
               </div>
             </motion.div>
             
@@ -123,76 +158,132 @@ export default function Contact() {
               <h2 className="font-display text-2xl font-bold text-foreground mb-2">Request a Quote</h2>
               <p className="text-muted-foreground text-sm mb-8">Fill out the form and we&apos;ll get back to you within 24 hours.</p>
               
-              <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">Full Name *</label>
-                  <input 
-                    type="text" 
-                    id="name" 
-                    required
-                    className="w-full px-4 py-3 border border-border bg-background focus:border-foreground outline-none transition-colors text-foreground placeholder:text-muted-foreground" 
-                    placeholder="Your name" 
-                  />
+              {formStatus === 'success' ? (
+                <div className="text-center py-12">
+                  <CheckCircle size={48} className="mx-auto mb-4 text-green-500" />
+                  <h3 className="font-display text-xl font-bold text-foreground mb-2">Thank You!</h3>
+                  <p className="text-muted-foreground mb-6">We&apos;ve received your request and will get back to you within 24 hours.</p>
+                  <button
+                    onClick={() => setFormStatus('idle')}
+                    className="text-sm font-medium text-foreground underline underline-offset-4 hover:opacity-70 transition-opacity"
+                  >
+                    Send another request
+                  </button>
                 </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              ) : (
+                <form 
+                  name="contact" 
+                  method="POST" 
+                  data-netlify="true"
+                  netlify-honeypot="bot-field"
+                  className="space-y-6" 
+                  onSubmit={handleSubmit}
+                >
+                  {/* Hidden fields for Netlify */}
+                  <input type="hidden" name="form-name" value="contact" />
+                  <p className="hidden">
+                    <label>
+                      Don&apos;t fill this out if you&apos;re human: <input name="bot-field" />
+                    </label>
+                  </p>
+
+                  {formStatus === 'error' && (
+                    <div className="flex items-center gap-3 p-4 bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400">
+                      <AlertCircle size={20} />
+                      <p className="text-sm">Something went wrong. Please try again or use WhatsApp.</p>
+                    </div>
+                  )}
+
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">Phone Number *</label>
-                    <input 
-                      type="tel" 
-                      id="phone" 
-                      required
-                      className="w-full px-4 py-3 border border-border bg-background focus:border-foreground outline-none transition-colors text-foreground placeholder:text-muted-foreground" 
-                      placeholder="+91 98765 43210" 
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="company" className="block text-sm font-medium text-foreground mb-2">Company Name</label>
+                    <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">Full Name *</label>
                     <input 
                       type="text" 
-                      id="company" 
-                      className="w-full px-4 py-3 border border-border bg-background focus:border-foreground outline-none transition-colors text-foreground placeholder:text-muted-foreground" 
-                      placeholder="Your company" 
+                      id="name" 
+                      name="name"
+                      required
+                      disabled={formStatus === 'submitting'}
+                      className="w-full px-4 py-3 border border-border bg-background focus:border-foreground outline-none transition-colors text-foreground placeholder:text-muted-foreground disabled:opacity-50" 
+                      placeholder="Your name" 
                     />
                   </div>
-                </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">Phone Number *</label>
+                      <input 
+                        type="tel" 
+                        id="phone" 
+                        name="phone"
+                        required
+                        disabled={formStatus === 'submitting'}
+                        className="w-full px-4 py-3 border border-border bg-background focus:border-foreground outline-none transition-colors text-foreground placeholder:text-muted-foreground disabled:opacity-50" 
+                        placeholder="+91 98765 43210" 
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="company" className="block text-sm font-medium text-foreground mb-2">Company Name</label>
+                      <input 
+                        type="text" 
+                        id="company" 
+                        name="company"
+                        disabled={formStatus === 'submitting'}
+                        className="w-full px-4 py-3 border border-border bg-background focus:border-foreground outline-none transition-colors text-foreground placeholder:text-muted-foreground disabled:opacity-50" 
+                        placeholder="Your company" 
+                      />
+                    </div>
+                  </div>
 
-                <div>
-                  <label htmlFor="product" className="block text-sm font-medium text-foreground mb-2">Product of Interest *</label>
-                  <select 
-                    id="product" 
-                    required
-                    className="w-full px-4 py-3 border border-border bg-background focus:border-foreground outline-none transition-colors text-foreground"
+                  <div>
+                    <label htmlFor="product" className="block text-sm font-medium text-foreground mb-2">Product of Interest *</label>
+                    <select 
+                      id="product" 
+                      name="product"
+                      required
+                      disabled={formStatus === 'submitting'}
+                      className="w-full px-4 py-3 border border-border bg-background focus:border-foreground outline-none transition-colors text-foreground disabled:opacity-50"
+                    >
+                      <option value="">Select a product...</option>
+                      {PRODUCTS.map(product => (
+                        <option key={product.id} value={product.title}>{product.title}</option>
+                      ))}
+                      <option value="Other">Other / Custom</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">Requirements / Quantity</label>
+                    <textarea 
+                      id="message" 
+                      name="message"
+                      rows={4} 
+                      disabled={formStatus === 'submitting'}
+                      className="w-full px-4 py-3 border border-border bg-background focus:border-foreground outline-none transition-colors text-foreground placeholder:text-muted-foreground resize-none disabled:opacity-50" 
+                      placeholder="Describe your requirements, quantities, specifications..."
+                    />
+                  </div>
+
+                  <button 
+                    type="submit" 
+                    disabled={formStatus === 'submitting'}
+                    className="w-full bg-foreground text-background font-semibold py-4 hover:opacity-90 transition-opacity flex items-center justify-center gap-2 disabled:opacity-50"
                   >
-                    <option value="">Select a product...</option>
-                    {PRODUCTS.map(product => (
-                      <option key={product.id} value={product.title}>{product.title}</option>
-                    ))}
-                    <option value="Other">Other / Custom</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">Requirements / Quantity</label>
-                  <textarea 
-                    id="message" 
-                    rows={4} 
-                    className="w-full px-4 py-3 border border-border bg-background focus:border-foreground outline-none transition-colors text-foreground placeholder:text-muted-foreground resize-none" 
-                    placeholder="Describe your requirements, quantities, specifications..."
-                  />
-                </div>
-
-                <button 
-                  type="submit" 
-                  className="w-full bg-foreground text-background font-semibold py-4 hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
-                >
-                  <Send size={18} />
-                  Send Request
-                </button>
-                <p className="text-center text-xs text-muted-foreground">
-                  * This form is a demo. For immediate response, please use WhatsApp.
-                </p>
-              </form>
+                    {formStatus === 'submitting' ? (
+                      <>
+                        <Loader2 size={18} className="animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send size={18} />
+                        Send Request
+                      </>
+                    )}
+                  </button>
+                  <p className="text-center text-xs text-muted-foreground">
+                    Your information is secure and will only be used to respond to your inquiry.
+                  </p>
+                </form>
+              )}
             </motion.div>
           </div>
         </div>

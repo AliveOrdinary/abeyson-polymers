@@ -19,6 +19,7 @@ export interface Category {
   description: string;
   icon: any;
   image: string;
+  heroImage: string; // landscape image for hero section
   products: Product[];
 }
 
@@ -49,6 +50,7 @@ export const PRODUCTS: Category[] = [
     description: "High-puncture resistant bags for homes, offices, and industries.",
     icon: Folder,
     image: "/images/garbage-bags.png",
+    heroImage: "/images/heroes/garbage-bags.png",
     products: [
       {
         id: "gb-small",
@@ -95,6 +97,7 @@ export const PRODUCTS: Category[] = [
     description: "High-tensile strength carry bags for retail.",
     icon: ShoppingBag,
     image: "/images/grocery-bags.png",
+    heroImage: "/images/heroes/grocery-bags.png",
     products: [
       {
         id: "grocery-std",
@@ -118,6 +121,7 @@ export const PRODUCTS: Category[] = [
     description: "Eco-friendly compostable bags.",
     icon: Leaf,
     image: "/images/biodegradable.png",
+    heroImage: "/images/heroes/biodegradable.png",
     products: [
       {
         id: "bio-bags",
@@ -140,6 +144,7 @@ export const PRODUCTS: Category[] = [
     description: "Specialized bags for agricultural saplings.",
     icon: Droplets,
     image: "/images/nursery.png",
+    heroImage: "/images/heroes/nursery.png",
     products: [
       {
         id: "nursery-std",
@@ -164,6 +169,7 @@ export const PRODUCTS: Category[] = [
     description: "Protection for rubber tapping panels.",
     icon: CloudRain,
     image: "/images/rain-guard.png",
+    heroImage: "/images/heroes/rain-guard.png",
     products: [
       {
         id: "rain-guard-std",
@@ -185,6 +191,7 @@ export const PRODUCTS: Category[] = [
     description: "Corona treated rolls for industrial printing.",
     icon: ScrollText,
     image: "/images/treated-rolls.png",
+    heroImage: "/images/heroes/treated-rolls.png",
     products: [
       {
         id: "corona-rolls",

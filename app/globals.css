@@ -34,31 +34,32 @@
   --border-hover: #a1a1aa;      /* Zinc 400 */
 }
 
+/* Dark mode commented out - client wants light mode only
 @media (prefers-color-scheme: dark) {
   :root {
-    /* Tech Premium Dark Mode */
-    --background: #09090b;       /* Zinc 950 */
-    --foreground: #fafafa;       /* Zinc 50 */
+    --background: #09090b;
+    --foreground: #fafafa;
     
     --primary: #fafafa;
     --primary-foreground: #09090b;
     
-    --accent: #4ade80;           /* Green 400 */
+    --accent: #4ade80;
     --accent-foreground: #09090b;
     
-    --secondary: #27272a;        /* Zinc 800 */
+    --secondary: #27272a;
     --secondary-foreground: #fafafa;
     
-    --muted: #18181b;            /* Zinc 900 */
-    --muted-foreground: #a1a1aa; /* Zinc 400 */
+    --muted: #18181b;
+    --muted-foreground: #a1a1aa;
     
     --card: #18181b;
     --card-foreground: #fafafa;
     
-    --border: #27272a;           /* Zinc 800 */
-    --border-hover: #52525b;     /* Zinc 600 */
+    --border: #27272a;
+    --border-hover: #52525b;
   }
 }
+*/
 
 @theme inline {
   --color-background: var(--background);
