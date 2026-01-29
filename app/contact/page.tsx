@@ -19,7 +19,7 @@ export default function Contact() {
     const formData = new FormData(form);
 
     try {
-      const response = await fetch('/', {
+      const response = await fetch('/__forms.html', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams(formData as any).toString(),
@@ -174,18 +174,11 @@ export default function Contact() {
                 <form 
                   name="contact" 
                   method="POST" 
-                  data-netlify="true"
-                  netlify-honeypot="bot-field"
                   className="space-y-6" 
                   onSubmit={handleSubmit}
                 >
-                  {/* Hidden fields for Netlify */}
+                  {/* Hidden field for Netlify Forms */}
                   <input type="hidden" name="form-name" value="contact" />
-                  <p className="hidden">
-                    <label>
-                      Don&apos;t fill this out if you&apos;re human: <input name="bot-field" />
-                    </label>
-                  </p>
 
                   {formStatus === 'error' && (
                     <div className="flex items-center gap-3 p-4 bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400">
