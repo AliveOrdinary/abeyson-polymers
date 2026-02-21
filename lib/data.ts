@@ -35,7 +35,7 @@ export const COMPANY_INFO = {
   address: "Pulickal Kavala, Kottayam, Kerala - 686515",
   whatsapp: "919447057769", // Pure number for API
   usps: [
-    { title: "35 Years of Stability", description: "Decades of trust in the Kerala market." },
+    { title: "31+ Years of Stability", description: "Decades of trust in the Kerala market." },
     { title: "Commitment to Quality", description: "Quality is the primary focus since day one." },
     { title: "Technical Versatility", description: "From simple bags to specialized industrial rolls." },
     { title: "Govt Approved", description: "Adherence to government thickness norms." },
@@ -80,7 +80,7 @@ export const PRODUCTS: Category[] = [
         id: "gb-large",
         name: "Large Industrial Bags",
         slug: "large-industrial-bags",
-        description: "Heavy-duty bags for industrial and outdoor use.",
+        description: "Heavy duty bags for hospitals, hospitality, and outdoor use.",
         categoryId: "garbage-bags",
         specs: {
           "Sizes": ["30x36 inches", "30x50 inches", "36x50 inches"],
@@ -107,7 +107,6 @@ export const PRODUCTS: Category[] = [
         categoryId: "grocery-bags",
         specs: {
           "Capacities": ["0.25kg", "0.5kg", "1kg", "2kg", "3kg", "5kg", "10kg", "15kg", "20kg", "25kg"],
-          "Handle Types": ["T-shirt", "D-cut"],
           "Standards": "Govt approved micron thickness"
         },
         features: ["High-tensile strength", "Food grade material available"]
@@ -131,9 +130,10 @@ export const PRODUCTS: Category[] = [
         categoryId: "biodegradable",
         specs: {
           "Sizes": ["10x14", "13x11", "16x20", "17x23", "24x30", "27x36 (inches)"],
-          "Material": "Bio-plastic / Bio-additives"
+          "Material": "Bio-plastic / Bio-additives",
+          "Handle Types": ["T-shirt", "D-cut"]
         },
-        features: ["Compostable logo compliant", "Eco-friendly"]
+        features: ["Eco-friendly"]
       }
     ]
   },

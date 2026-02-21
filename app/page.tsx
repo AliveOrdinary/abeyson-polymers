@@ -9,7 +9,7 @@ import { motion } from 'framer-motion';
 const usps = [
   {
     icon: Factory,
-    title: '35+ Years',
+    title: '31+ Years',
     description: 'Decades of manufacturing excellence in Kerala'
   },
   {

@@ -7,7 +7,7 @@ import { Factory, TrendingUp, Award, Users, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const stats = [
-  { value: '35+', label: 'Years of Excellence' },
+  { value: '31+', label: 'Years of Excellence' },
   { value: '12', label: 'Machines Operating' },
   { value: '6', label: 'Product Lines' },
   { value: '1000+', label: 'Clients Served' },
@@ -94,7 +94,7 @@ export default function About() {
                   Founded by <strong className="text-foreground">Mr. Manoj Thomas</strong> in {COMPANY_INFO.established}, {COMPANY_INFO.name} began as a modest operation with just 3 machines producing a single product—Grocery Bags. 
                 </p>
                 <p>
-                  Over the last 3.5 decades, our commitment to quality and integrity has driven significant expansion. Today, we operate <strong className="text-foreground">12 state-of-the-art machines</strong>, manufacturing 6 distinct product lines with a dedicated team of skilled professionals.
+                  Over the last 3 decades, our commitment to quality and integrity has driven significant expansion. Today, we operate <strong className="text-foreground">12 state-of-the-art machines</strong>, manufacturing 6 distinct product lines with a dedicated team of skilled professionals.
                 </p>
                 <p>
                   From simple grocery bags to specialized &quot;Corona Treated&quot; printing rolls and agricultural sheets, we have established ourselves as a trusted partner for industries across Kerala and beyond.
